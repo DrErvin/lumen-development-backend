@@ -2,17 +2,17 @@
   {
     "id": 1,
     "type": "Job Offer",
-    "fieldOfStudy": "Software Engineering",
-    "title": "Frontend Developer",
-    "company": "Deutsche Telekom",
-    "location": "Berlin",
+    "fieldOfStudy": "Hospitality and Tourism Management",
+    "title": "Waiter",
+    "company": "Vatra",
+    "location": "Sarajevo",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in varius nulla.",
     "qualificationsAndRequirements": [
-      "Bachelor's degree in Computer Science or related field",
-      "Proficiency in JavaScript and React",
-      "Strong problem-solving and communication skills"
+      "High school diploma or equivalent",
+      "Experience in customer service or food service industry",
+      "Strong multitasking and communication skills"
     ],
-    "tags": ["JavaScript", "React", "CSS"],
+    "tags": ["Experienced", "Sarajevo", "M/F"],
     "experienceRequired": "Junior",
     "engagementType": "Full-time",
     "workArrangement": "Remote",
@@ -23,24 +23,24 @@
       "Opportunities for professional development"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "contactPerson": "Jane Doe",
+    "contactPerson": "Ervin Dragović",
     "contactPersonEmail": "ervin.dragovic@gmail.com",
     "featured": true
   },
   {
     "id": 2,
     "type": "Internship",
-    "fieldOfStudy": "Artificial Intelligence and Data Engineering",
-    "title": "Data Science Intern",
-    "company": "Deutsche Telekom",
-    "location": "Sarajevo",
+    "fieldOfStudy": "Medical Care",
+    "title": "Nurse",
+    "company": "Univeristy Hospital Centre Zagreb",
+    "location": "Zagreb",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod.",
     "qualificationsAndRequirements": [
-      "Basic knowledge of Python or R",
-      "Understanding of data visualization tools",
-      "Strong analytical skills and problem-solving ability"
+      "Medical High School Diploma",
+      "Interest in patient care and healthcare services",
+      "Strong interpersonal and communication skills"
     ],
-    "tags": ["Python", "ML", "Big Data"],
+    "tags": ["Student", "Young", "M/F"],
     "experienceRequired": "Intern",
     "engagementType": "Part-time",
     "workArrangement": "Hybrid",
@@ -51,43 +51,43 @@
       "Flexible work schedule"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "contactPerson": "John Smith",
-    "contactPersonEmail": "john.smith@telekom.com",
+    "contactPerson": "Riad Elezović",
+    "contactPersonEmail": "riad.elezovic@gmail.com",
     "featured": true
   },
   {
     "id": 3,
     "type": "Thesis Topic",
-    "fieldOfStudy": "Electrical and Electronics Engineering",
-    "title": "IoT for Smart Cities",
-    "company": "Deutsche Telekom",
-    "location": "Mostar",
+    "fieldOfStudy": "Economics and Business Administration",
+    "title": "Accounting and Financial Analysis ",
+    "company": "Unicredit Bank",
+    "location": "Split",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et ligula.",
     "qualificationsAndRequirements": [
-      "Interest in IoT applications and technologies",
-      "Knowledge of networking protocols",
-      "Ability to work independently on research projects"
+      "Background in accounting or finance",
+      "Proficiency in financial analysis tools",
+      "Strong analytical and problem-solving skills"
     ],
-    "tags": ["IoT", "Smart Cities", "5G"],
+    "tags": ["Accounting", "Student", "Math"],
     "experienceRequired": "Not required",
     "engagementType": "Flexible",
     "workArrangement": "Remote",
     "endingDate": "2025-05-01",
     "benefits": [
-      "Access to advanced IoT labs and equipment",
+      "Access to financial data and reports",
       "Research mentorship from industry experts",
       "Opportunity to publish papers"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "contactPerson": "Alice Brown",
-    "contactPersonEmail": "alice.brown@telekom.com"
+    "contactPerson": "Jasir Čolović",
+    "contactPersonEmail": "jasir.colovic@gmail.com"
   },
   {
     "id": 4,
     "type": "Mentorship",
     "fieldOfStudy": "Media and Communication",
     "title": "Digital Marketing Strategy",
-    "company": "Deutsche Telekom",
+    "company": "Publisher",
     "location": "Hamburg",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet nulla.",
     "qualificationsAndRequirements": [
