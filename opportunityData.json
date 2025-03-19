@@ -2,17 +2,17 @@
   {
     "id": 1,
     "type": "Job Offer",
-    "fieldOfStudy": "Hospitality and Tourism Management",
-    "title": "Waiter",
-    "company": "Vatra",
-    "location": "Sarajevo",
+    "fieldOfStudy": "Software Engineering",
+    "title": "Frontend Developer",
+    "company": "Deutsche Telekom",
+    "location": "Berlin",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in varius nulla.",
     "qualificationsAndRequirements": [
-      "High school diploma or equivalent",
-      "Experience in customer service or food service industry",
-      "Strong multitasking and communication skills"
+      "Bachelor's degree in Computer Science or related field",
+      "Proficiency in JavaScript and React",
+      "Strong problem-solving and communication skills"
     ],
-    "tags": ["Experienced", "Sarajevo", "M/F"],
+    "tags": ["JavaScript", "React", "CSS"],
     "experienceRequired": "Junior",
     "engagementType": "Full-time",
     "workArrangement": "Remote",
@@ -23,24 +23,24 @@
       "Opportunities for professional development"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "contactPerson": "Ervin Dragović",
+    "contactPerson": "Jane Doe",
     "contactPersonEmail": "ervin.dragovic@gmail.com",
     "featured": true
   },
   {
     "id": 2,
     "type": "Internship",
-    "fieldOfStudy": "Medical Care",
-    "title": "Nurse",
-    "company": "Univeristy Hospital Centre Zagreb",
-    "location": "Zagreb",
+    "fieldOfStudy": "Artificial Intelligence and Data Engineering",
+    "title": "Data Science Intern",
+    "company": "Deutsche Telekom",
+    "location": "Sarajevo",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod.",
     "qualificationsAndRequirements": [
-      "Medical High School Diploma",
-      "Interest in patient care and healthcare services",
-      "Strong interpersonal and communication skills"
+      "Basic knowledge of Python or R",
+      "Understanding of data visualization tools",
+      "Strong analytical skills and problem-solving ability"
     ],
-    "tags": ["Student", "Young", "M/F"],
+    "tags": ["Python", "ML", "Big Data"],
     "experienceRequired": "Intern",
     "engagementType": "Part-time",
     "workArrangement": "Hybrid",
@@ -51,36 +51,36 @@
       "Flexible work schedule"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "contactPerson": "Riad Elezović",
-    "contactPersonEmail": "riad.elezovic@gmail.com",
+    "contactPerson": "John Smith",
+    "contactPersonEmail": "john.smith@telekom.com",
     "featured": true
   },
   {
     "id": 3,
     "type": "Thesis Topic",
-    "fieldOfStudy": "Economics and Business Administration",
-    "title": "Accounting and Financial Analysis ",
-    "company": "Unicredit Bank",
-    "location": "Split",
+    "fieldOfStudy": "Electrical and Electronics Engineering",
+    "title": "IoT for Smart Cities",
+    "company": "Deutsche Telekom",
+    "location": "Mostar",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et ligula.",
     "qualificationsAndRequirements": [
-      "Background in accounting or finance",
-      "Proficiency in financial analysis tools",
-      "Strong analytical and problem-solving skills"
+      "Interest in IoT applications and technologies",
+      "Knowledge of networking protocols",
+      "Ability to work independently on research projects"
     ],
-    "tags": ["Accounting", "Student", "Math"],
+    "tags": ["IoT", "Smart Cities", "5G"],
     "experienceRequired": "Not required",
     "engagementType": "Flexible",
     "workArrangement": "Remote",
     "endingDate": "2025-05-01",
     "benefits": [
-      "Access to financial data and reports",
+      "Access to advanced IoT labs and equipment",
       "Research mentorship from industry experts",
       "Opportunity to publish papers"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "contactPerson": "Jasir Čolović",
-    "contactPersonEmail": "jasir.colovic@gmail.com"
+    "contactPerson": "Alice Brown",
+    "contactPersonEmail": "alice.brown@telekom.com"
   },
   {
     "id": 4,
