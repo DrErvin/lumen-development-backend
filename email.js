@@ -4,8 +4,8 @@ const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
   service: "Gmail", // Change if using another email service
   auth: {
-    user: "noreply.telekom.student.platform@gmail.com", // Application email
-    pass: "nslv iisy vnzo mojd", // App password
+    user: "noreply.company.student.platform@gmail.com", // Application email
+    pass: "nuvh kabr irkk jvcz", // App password // App password
   },
 });
 

@@ -2,17 +2,17 @@
   {
     "id": 1,
     "type": "Job Offer",
-    "fieldOfStudy": "Hospitality and Tourism Management",
-    "title": "Waiter",
-    "company": "Vatra",
-    "location": "Sarajevo",
+    "fieldOfStudy": "Software Engineering",
+    "title": "Frontend Developer",
+    "company": "Company Name",
+    "location": "Zagreb",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in varius nulla.",
     "qualificationsAndRequirements": [
-      "High school diploma or equivalent",
-      "Experience in customer service or food service industry",
-      "Strong multitasking and communication skills"
+      "Bachelor's degree in Computer Science or related field",
+      "Proficiency in JavaScript and React",
+      "Strong problem-solving and communication skills"
     ],
-    "tags": ["Experienced", "Sarajevo", "M/F"],
+    "tags": ["JavaScript", "React", "CSS"],
     "experienceRequired": "Junior",
     "engagementType": "Full-time",
     "workArrangement": "Remote",
@@ -23,72 +23,72 @@
       "Opportunities for professional development"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "contactPerson": "Ervin Dragović",
+    "contactPerson": "Jane Doe",
     "contactPersonEmail": "ervin.dragovic@gmail.com",
     "featured": true
   },
   {
     "id": 2,
     "type": "Internship",
-    "fieldOfStudy": "Medical Care",
-    "title": "Nurse",
-    "company": "Univeristy Hospital Centre Zagreb",
-    "location": "Zagreb",
+    "fieldOfStudy": "Artificial Intelligence and Data Engineering",
+    "title": "Data Science Intern",
+    "company": "Company Name",
+    "location": "Sarajevo",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod.",
     "qualificationsAndRequirements": [
-      "Medical High School Diploma",
-      "Interest in patient care and healthcare services",
-      "Strong interpersonal and communication skills"
+      "Basic knowledge of Python or R",
+      "Understanding of data visualization tools",
+      "Strong analytical skills and problem-solving ability"
     ],
-    "tags": ["Student", "Young", "M/F"],
+    "tags": ["Python", "ML", "Big Data"],
     "experienceRequired": "Intern",
     "engagementType": "Part-time",
     "workArrangement": "Hybrid",
     "endingDate": "2025-05-06",
     "benefits": [
       "Practical experience with real-world datasets",
-      "Mentorship from experienced healthcare professionals",
+      "Networking opportunities with professionals",
       "Flexible work schedule"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "contactPerson": "Riad Elezović",
-    "contactPersonEmail": "riad.elezovic@gmail.com",
+    "contactPerson": "John Smith",
+    "contactPersonEmail": "john.smith@company.com",
     "featured": true
   },
   {
     "id": 3,
     "type": "Thesis Topic",
-    "fieldOfStudy": "Economics and Business Administration",
-    "title": "Accounting and Financial Analysis ",
-    "company": "Unicredit Bank",
-    "location": "Split",
+    "fieldOfStudy": "Electrical and Electronics Engineering",
+    "title": "IoT for Smart Cities",
+    "company": "Company Name",
+    "location": "Mostar",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et ligula.",
     "qualificationsAndRequirements": [
-      "Background in accounting or finance",
-      "Proficiency in financial analysis tools",
-      "Strong analytical and problem-solving skills"
+      "Interest in IoT applications and technologies",
+      "Knowledge of networking protocols",
+      "Ability to work independently on research projects"
     ],
-    "tags": ["Accounting", "Student", "Math"],
+    "tags": ["IoT", "Smart Cities", "5G"],
     "experienceRequired": "Not required",
     "engagementType": "Flexible",
     "workArrangement": "Remote",
     "endingDate": "2025-05-01",
     "benefits": [
-      "Access to financial data and reports",
+      "Access to advanced IoT labs and equipment",
       "Research mentorship from industry experts",
       "Opportunity to publish papers"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "contactPerson": "Jasir Čolović",
-    "contactPersonEmail": "jasir.colovic@gmail.com"
+    "contactPerson": "Alice Brown",
+    "contactPersonEmail": "alice.brown@company.com"
   },
   {
     "id": 4,
     "type": "Mentorship",
     "fieldOfStudy": "Media and Communication",
     "title": "Digital Marketing Strategy",
-    "company": "Telemach",
-    "location": "Belgrade",
+    "company": "Company Name",
+    "location": "Split",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet nulla.",
     "qualificationsAndRequirements": [
       "Familiarity with SEO and Google Analytics",
@@ -107,15 +107,15 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Emily Green",
-    "contactPersonEmail": "emily.green@gmail.com"
+    "contactPersonEmail": "emily.green@company.com"
   },
   {
     "id": 5,
     "type": "Job Offer",
     "fieldOfStudy": "Computer Sciences and Engineering",
     "title": "Backend Developer",
-    "company": "Netgen",
-    "location": "Zagreb",
+    "company": "Company Name",
+    "location": "Rijeka",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fringilla.",
     "qualificationsAndRequirements": [
       "Proficiency in Node.js and RESTful APIs",
@@ -134,43 +134,43 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Robert White",
-    "contactPersonEmail": "robert.white@outlook.com",
+    "contactPersonEmail": "robert.white@company.com",
     "featured": true
   },
   {
     "id": 6,
     "type": "Extra Curriculum Project",
-    "fieldOfStudy": "Economics and Business Administration",
-    "title": " Management",
-    "company": "INA Zagreb",
-    "location": "Zagreb",
+    "fieldOfStudy": "Visual Arts and Visual Communications Design",
+    "title": "Augmented Reality Interfaces",
+    "company": "Company Name",
+    "location": "Tuzla",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vehicula.",
     "qualificationsAndRequirements": [
-      "Finance or business background",
-      "Interest in management consulting",
-      "Univeristy student or recent graduate"
+      "Basic knowledge of Unity or Unreal Engine",
+      "Interest in user experience design",
+      "Creative thinking for AR solutions"
     ],
-    "tags": ["Finances", "Team Leader", "Management"],
+    "tags": ["AR", "Unity", "UX Design"],
     "experienceRequired": "Intermediate",
     "engagementType": "Project-based",
     "workArrangement": "Remote",
     "endingDate": "2025-04-12",
     "benefits": [
-      "Access to personal development resources",
+      "Access to AR/VR development tools",
       "Collaboration with multidisciplinary teams",
       "Opportunities to showcase work"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Anna Williams",
-    "contactPersonEmail": "ina.croatia@gmail.com"
+    "contactPersonEmail": "anna.williams@company.com"
   },
   {
     "id": 7,
     "type": "Job Offer",
     "fieldOfStudy": "Genetics and Bioengineering",
     "title": "Bioinformatics Specialist",
-    "company": "Pliva",
-    "location": "Sarajevo",
+    "company": "Company Name",
+    "location": "Banja Luka",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at risus.",
     "qualificationsAndRequirements": [
       "Experience in bioinformatics and computational biology",
@@ -189,104 +189,104 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Laura Clarke",
-    "contactPersonEmail": "laura.clarke@gmail.com"
+    "contactPersonEmail": "laura.clarke@company.com"
   },
   {
     "id": 8,
     "type": "Internship",
-    "fieldOfStudy": "Law and Legal Studies",
-    "title": "Legal Intern",
-    "company": "Unicredit Bank",
-    "location": "Ljubljana",
+    "fieldOfStudy": "Mechanical Engineering",
+    "title": "Robotics Intern",
+    "company": "Company Name",
+    "location": "Osijek",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan.",
     "qualificationsAndRequirements": [
-      "Enrollment in law school or related field",
-      "Interest in banking and finance law",
-      "Strong research and writing skills"
+      "Familiarity with CAD software",
+      "Interest in automation technologies",
+      "Ability to collaborate in team environments"
     ],
-    "tags": ["Law", "Communication", "Junior"],
+    "tags": ["Robotics", "CAD", "Automation"],
     "experienceRequired": "Intern",
     "engagementType": "Part-time",
     "workArrangement": "On-site",
     "endingDate": "2025-03-29",
     "benefits": [
-      "Insight into banking and finance law practices",
+      "Exposure to advanced robotics tools",
       "Hands-on project experience",
-      "Mentorship from law leaders"
+      "Mentorship from industry leaders"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Kevin Martin",
-    "contactPersonEmail": "kevin.martin@gmail.com"
+    "contactPersonEmail": "kevin.martin@company.com"
   },
   {
     "id": 9,
     "type": "Mentorship",
-    "fieldOfStudy": "Medical Care",
-    "title": "Dermatology Research Mentorship",
-    "company": "Vitalis",
-    "location": "Mostar",
+    "fieldOfStudy": "Artificial Intelligence and Data Engineering",
+    "title": "AI Ethics and Applications",
+    "company": "Company Name",
+    "location": "Zadar",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque.",
     "qualificationsAndRequirements": [
-      "Background in dermatology or related field",
-      "Interest in clinical research",
+      "Understanding of ethical AI concepts",
+      "Interest in machine learning applications",
       "Strong analytical skills"
     ],
-    "tags": ["Ethical Care", "Doctor", "Researcher"],
+    "tags": ["Ethical AI", "Data Privacy", "Machine Learning"],
     "experienceRequired": "N/A",
     "engagementType": "Part-time",
     "workArrangement": "Remote",
     "endingDate": "2025-04-05",
     "benefits": [
-      "Mentorship from leading dermatologists",
-      "Access to clinical research resources",
+      "Networking with AI professionals",
+      "Access to AI tools and platforms",
       "In-depth discussions on ethical dilemmas"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Sarah Taylor",
-    "contactPersonEmail": "sarah.vitalis@gmail.com",
+    "contactPersonEmail": "sarah.taylor@company.com",
     "featured": true
   },
   {
     "id": 10,
     "type": "Thesis Topic",
     "fieldOfStudy": "Electrical and Electronics Engineering",
-    "title": "Expert for High Voltage Charging Systems",
-    "company": "HEP Grupa",
-    "location": "Rijeka",
+    "title": "Wireless Charging Systems",
+    "company": "Company Name",
+    "location": "Pula",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sodales.",
     "qualificationsAndRequirements": [
       "Knowledge of electrical circuits",
-      "Experience in high voltage systems",
+      "Interest in wireless technologies",
       "Strong research skills"
     ],
-    "tags": ["Voltage", "Circuits", "Electronics"],
+    "tags": ["Wireless", "Charging", "Electronics"],
     "experienceRequired": "N/A",
     "engagementType": "Flexible",
     "workArrangement": "Remote",
     "endingDate": "2025-04-30",
     "benefits": [
-      "Access to industry experts",
+      "Access to state-of-the-art labs",
       "Research mentorship",
       "Opportunity to contribute to cutting-edge technology"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "David Johnson",
-    "contactPersonEmail": "david.hep@gmail.com"
+    "contactPersonEmail": "david.johnson@company.com"
   },
   {
     "id": 11,
     "type": "Extra Curriculum Project",
     "fieldOfStudy": "Software Engineering",
     "title": "Open Source Contribution",
-    "company": "LANACO",
-    "location": "Banja Luka",
+    "company": "Company Name",
+    "location": "Dubrovnik",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt.",
     "qualificationsAndRequirements": [
       "Experience with Git and version control",
       "Strong coding skills",
       "Willingness to collaborate on open source projects"
     ],
-    "tags": ["Open Source", "Git", "Coding"],
+    "tags": ["Open Source", "Git", "Telecom"],
     "experienceRequired": "Intermediate",
     "engagementType": "Project-based",
     "workArrangement": "Remote",
@@ -298,15 +298,15 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Sophia Lee",
-    "contactPersonEmail": "sophia.lanaco@gmail.com"
+    "contactPersonEmail": "sophia.lee@company.com"
   },
   {
     "id": 12,
     "type": "Job Offer",
     "fieldOfStudy": "Artificial Intelligence and Data Engineering",
     "title": "Machine Learning Engineer",
-    "company": "Gauss Development",
-    "location": "Osijek",
+    "company": "Company Name",
+    "location": "Varaždin",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus blandit.",
     "qualificationsAndRequirements": [
       "Proficiency in Python and TensorFlow",
@@ -325,15 +325,15 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Mark Allen",
-    "contactPersonEmail": "mark.gauss@gmail.com"
+    "contactPersonEmail": "mark.allen@company.com"
   },
   {
     "id": 13,
     "type": "Internship",
     "fieldOfStudy": "Mechanical Engineering",
     "title": "Automation Intern",
-    "company": "Rimac",
-    "location": "Zagreb",
+    "company": "Company Name",
+    "location": "Slavonski Brod",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas posuere.",
     "qualificationsAndRequirements": [
       "Basic understanding of automation tools",
@@ -352,7 +352,7 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Liam Brown",
-    "contactPersonEmail": "liam.rimac@gmail.com",
+    "contactPersonEmail": "liam.brown@company.com",
     "featured": true
   },
   {
@@ -360,8 +360,8 @@
     "type": "Mentorship",
     "fieldOfStudy": "Visual Arts and Visual Communications Design",
     "title": "UI/UX Design Principles",
-    "company": "NSoft",
-    "location": "Mostar",
+    "company": "Company Name",
+    "location": "Šibenik",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo.",
     "qualificationsAndRequirements": [
       "Familiarity with design systems and tools (e.g., Figma, Adobe XD)",
@@ -380,7 +380,7 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Olivia White",
-    "contactPersonEmail": "olivia.NSoft@gmail.com",
+    "contactPersonEmail": "olivia.white@company.com",
     "featured": true
   }
 ]

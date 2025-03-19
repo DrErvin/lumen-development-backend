@@ -9,11 +9,11 @@
     "university_location": "Bosnia and Herzegovina"
   },
   {
-    "id": "t-1",
-    "name_and_surname": "Test Telekom",
-    "email": "example@telekom.com",
+    "id": "c-1",
+    "name_and_surname": "Test Company",
+    "email": "example@company.com",
     "password": "Test123",
-    "account_type": "Telekom"
+    "account_type": "company"
   },
   {
     "id": "s-2",
