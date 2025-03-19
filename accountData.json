@@ -1,0 +1,72 @@
+[
+  {
+    "id": "s-1",
+    "name_and_surname": "Mujo Mujic",
+    "email": "dragovicdaris@gmail.com",
+    "password": "Test123",
+    "account_type": "student",
+    "university_name": "International University of Sarajevo",
+    "university_location": "Bosnia and Herzegovina"
+  },
+  {
+    "id": "t-1",
+    "name_and_surname": "Test Telekom",
+    "email": "example@telekom.com",
+    "password": "Test123",
+    "account_type": "Telekom"
+  },
+  {
+    "id": "s-2",
+    "name_and_surname": "Jamal Stuart",
+    "email": "studentuser@mdx.ac.uk",
+    "password": "SecurePassword123",
+    "account_type": "student",
+    "university_name": "Middlesex University",
+    "university_location": "United Kingdom"
+  },
+  {
+    "id": "s-3",
+    "name_and_surname": "John Doe",
+    "email": "studentuser@middlebury.edu",
+    "password": "Test123",
+    "account_type": "student",
+    "university_name": "Middlebury College",
+    "university_location": "USA"
+  },
+  {
+    "id": "s-4",
+    "name_and_surname": "Emma Johnson",
+    "email": "emma.johnson@harvard.edu",
+    "password": "Test123",
+    "account_type": "student",
+    "university_name": "Harvard University",
+    "university_location": "USA"
+  },
+  {
+    "id": "s-5",
+    "name_and_surname": "Liam Smith",
+    "email": "liam.smith@mcgill.ca",
+    "password": "Test123",
+    "account_type": "student",
+    "university_name": "McGill University",
+    "university_location": "Canada"
+  },
+  {
+    "id": "s-6",
+    "name_and_surname": "Sophia Müller",
+    "email": "sophia.muller@uni-heidelberg.de",
+    "password": "Test123",
+    "account_type": "student",
+    "university_name": "Heidelberg University",
+    "university_location": "Germany"
+  },
+  {
+    "id": "s-7",
+    "name_and_surname": "Ervin Dragovic",
+    "email": "220302185@student.ius.edu.ba",
+    "password": "Test123",
+    "account_type": "student",
+    "university_name": "International University of Sarajevo",
+    "university_location": "Bosnia and Herzegovina"
+  }
+]
