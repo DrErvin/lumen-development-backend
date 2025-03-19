@@ -45,7 +45,7 @@ const WU_FILE = path.join(
 // Default route for '/'
 app.get("/", (req, res) => {
   res.send(
-    "Welcome to the API. Use /opportunities, /accounts, /applications, /smart-search or /world-universities to fetch data."
+    "Welcome to the API. Use /opportunities, /accounts, /applications or /world-universities to fetch data."
   );
 });
 
@@ -259,14 +259,14 @@ app.post(
       const studentEmail = user.email;
       const universityName = user.university_name || "N/A";
       const universityLocation = user.university_location || "N/A";
-      const telekomEmail = opportunity.contactPersonEmail;
+      const companyEmail = opportunity.contactPersonEmail;
       const opportunityTitle = opportunity.title;
 
-      // Email to Telekom employee
-      const telekomMailOptions = {
-        from: "noreply.telekom.student.platform@gmail.com",
-        to: telekomEmail,
-        subject: `New Application for ${opportunityTitle} through Student Platform`,
+      // Email to Company employee
+      const companyMailOptions = {
+        from: "noreply.company.student.platform@gmail.com",
+        to: companyEmail,
+        subject: `New Application for ${opportunityTitle} through the Student Platform`,
         html: `<h1>New Application Received</h1>
         <h3>${studentName} has applied for <b>${opportunityTitle}</b> opportunity.</h3>
         <p><b>Applicant:</b> ${studentName} (${studentEmail})</p>
@@ -279,13 +279,13 @@ app.post(
 
       // Email to student
       const studentMailOptions = {
-        from: "noreply.telekom.student.platform@gmail.com",
+        from: "noreply.company.student.platform@gmail.com",
         to: studentEmail,
         subject: `Application Confirmation for ${opportunityTitle}`,
         html: `<h1>Application Confirmation</h1>
         <h3>Thank you for applying for <b>${opportunityTitle} opportunity</b>.</h3>
         <p><b>Opportunity:</b> ${opportunityTitle}</p>
-        <p><b>Contact Person Email:</b> ${telekomEmail}</p>
+        <p><b>Contact Person Email:</b> ${companyEmail}</p>
         <p><b>Your Name:</b> ${studentName}</p>
         <p><b>Your Email:</b> ${studentEmail}</p>
         <p><b>University:</b> ${universityName}, ${universityLocation}</p>`,
@@ -296,7 +296,7 @@ app.post(
 
       // Send emails
       console.log("Sending emails...");
-      await transporter.sendMail(telekomMailOptions);
+      await transporter.sendMail(companyMailOptions);
       await transporter.sendMail(studentMailOptions);
 
       // Cleanup: Delete the uploaded file
@@ -319,90 +319,6 @@ app.post(
     }
   }
 );
-
-app.post("/smart-search", async (req, res) => {
-  try {
-    const { query } = req.body;
-    console.log(query);
-    if (!query)
-      return res.status(400).json({ error: "Query is required" });
-
-    // Read JSON data from files
-    const accounts = await readJSONFile(ACCOUNTS_FILE);
-    const opportunities = await readJSONFile(OPPORTUNITIES_FILE);
-    const applications = await readJSONFile(APPLICATIONS_FILE);
-
-    // Merge data into a human-readable prompt
-    const documents = applications.map((app) => {
-      const user =
-        accounts.find((acc) => acc.id === app.user_id) || {};
-      const opportunity =
-        opportunities.find((opp) => opp.id == app.opportunity_id) ||
-        {};
-      return `[ID: ${app.application_id}] Applicant "${user.name_and_surname}" from University "${user.university_name}" located at "${user.university_location}" applied for "${opportunity.title}" opportunity from "${opportunity.location}" on application date of "${app.application_date}".`;
-    });
-
-    const prompt = `Find the most relevant matches for this query: "${query}". Here are the applications:\n${documents.join(
-      "\n"
-    )}\n\nPlease return only the application IDs that match the query. Provide the IDs in the following format:\n\n"Matching IDs: [1, 2, 3]"`;
-    console.log(prompt);
-
-    // Send the prompt to the DeepSeek AI model
-    const response = await fetch(
-      "http://127.0.0.1:11434/api/generate",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "nezahatkorkmaz/deepseek-v3:latest",
-          prompt,
-          stream: false,
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`DeepSeek API error: ${response.statusText}`);
-    }
-
-    const responseData = await response.json();
-    const deepSeekResponse = responseData.response;
-
-    // Extract matching application IDs
-    const match = deepSeekResponse.match(/Matching IDs: \[(.*?)\]/);
-    const matchingIds = match
-      ? match[1].split(",").map((id) => id.trim())
-      : [];
-
-    // Filter applications based on IDs and enrich them with full data
-    const enrichedResults = applications
-      .filter((app) => matchingIds.includes(app.application_id))
-      .map((app) => {
-        const user =
-          accounts.find((acc) => acc.id === app.user_id) || {};
-        const opportunity =
-          opportunities.find((opp) => opp.id == app.opportunity_id) ||
-          {};
-        return {
-          application_id: app.application_id,
-          application_date: app.application_date,
-          applicant_name: user.name_and_surname,
-          applicant_email: user.email,
-          university_name: user.university_name,
-          university_location: user.university_location,
-          opportunity_title: opportunity.title,
-          opportunity_location: opportunity.location,
-        };
-      });
-
-    res.json(enrichedResults);
-  } catch (error) {
-    console.error("Error performing smart search:", error);
-    res.status(500).json({ error: "Failed to perform smart search" });
-  }
-});
 
 // GET endpoint to fetch all world universities
 app.get("/world-universities", (req, res) => {
