@@ -87,8 +87,8 @@
     "type": "Mentorship",
     "fieldOfStudy": "Media and Communication",
     "title": "Digital Marketing Strategy",
-    "company": "Publisher",
-    "location": "Hamburg",
+    "company": "Telemach",
+    "location": "Belgrade",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet nulla.",
     "qualificationsAndRequirements": [
       "Familiarity with SEO and Google Analytics",
@@ -107,15 +107,15 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Emily Green",
-    "contactPersonEmail": "emily.green@telekom.com"
+    "contactPersonEmail": "emily.green@gmail.com"
   },
   {
     "id": 5,
     "type": "Job Offer",
     "fieldOfStudy": "Computer Sciences and Engineering",
     "title": "Backend Developer",
-    "company": "Deutsche Telekom",
-    "location": "Munich",
+    "company": "Netgen",
+    "location": "Zagreb",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fringilla.",
     "qualificationsAndRequirements": [
       "Proficiency in Node.js and RESTful APIs",
@@ -134,43 +134,43 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Robert White",
-    "contactPersonEmail": "robert.white@telekom.com",
+    "contactPersonEmail": "robert.white@outlook.com",
     "featured": true
   },
   {
     "id": 6,
     "type": "Extra Curriculum Project",
-    "fieldOfStudy": "Visual Arts and Visual Communications Design",
-    "title": "Augmented Reality Interfaces",
-    "company": "Deutsche Telekom",
-    "location": "Berlin",
+    "fieldOfStudy": "Economics and Business Administration",
+    "title": " Management",
+    "company": "INA Zagreb",
+    "location": "Zagreb",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vehicula.",
     "qualificationsAndRequirements": [
-      "Basic knowledge of Unity or Unreal Engine",
-      "Interest in user experience design",
-      "Creative thinking for AR solutions"
+      "Finance or business background",
+      "Interest in management consulting",
+      "Univeristy student or recent graduate"
     ],
-    "tags": ["AR", "Unity", "UX Design"],
+    "tags": ["Finances", "Team Leader", "Management"],
     "experienceRequired": "Intermediate",
     "engagementType": "Project-based",
     "workArrangement": "Remote",
     "endingDate": "2025-04-12",
     "benefits": [
-      "Access to AR/VR development tools",
+      "Access to personal development resources",
       "Collaboration with multidisciplinary teams",
       "Opportunities to showcase work"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Anna Williams",
-    "contactPersonEmail": "anna.williams@telekom.com"
+    "contactPersonEmail": "ina.croatia@gmail.com"
   },
   {
     "id": 7,
     "type": "Job Offer",
     "fieldOfStudy": "Genetics and Bioengineering",
     "title": "Bioinformatics Specialist",
-    "company": "Deutsche Telekom",
-    "location": "Frankfurt",
+    "company": "Pliva",
+    "location": "Sarajevo",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at risus.",
     "qualificationsAndRequirements": [
       "Experience in bioinformatics and computational biology",
@@ -189,104 +189,104 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Laura Clarke",
-    "contactPersonEmail": "laura.clarke@telekom.com"
+    "contactPersonEmail": "laura.clarke@gmail.com"
   },
   {
     "id": 8,
     "type": "Internship",
-    "fieldOfStudy": "Mechanical Engineering",
-    "title": "Robotics Intern",
-    "company": "Deutsche Telekom",
-    "location": "Cologne",
+    "fieldOfStudy": "Law and Legal Studies",
+    "title": "Legal Intern",
+    "company": "Unicredit Bank",
+    "location": "Ljubljana",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan.",
     "qualificationsAndRequirements": [
-      "Familiarity with CAD software",
-      "Interest in automation technologies",
-      "Ability to collaborate in team environments"
+      "Enrollment in law school or related field",
+      "Interest in banking and finance law",
+      "Strong research and writing skills"
     ],
-    "tags": ["Robotics", "CAD", "Automation"],
+    "tags": ["Law", "Communication", "Junior"],
     "experienceRequired": "Intern",
     "engagementType": "Part-time",
     "workArrangement": "On-site",
     "endingDate": "2025-03-29",
     "benefits": [
-      "Exposure to advanced robotics tools",
+      "Insight into banking and finance law practices",
       "Hands-on project experience",
-      "Mentorship from industry leaders"
+      "Mentorship from law leaders"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Kevin Martin",
-    "contactPersonEmail": "kevin.martin@telekom.com"
+    "contactPersonEmail": "kevin.martin@gmail.com"
   },
   {
     "id": 9,
     "type": "Mentorship",
-    "fieldOfStudy": "Artificial Intelligence and Data Engineering",
-    "title": "AI Ethics and Applications",
-    "company": "Deutsche Telekom",
-    "location": "Berlin",
+    "fieldOfStudy": "Medical Care",
+    "title": "Dermatology Research Mentorship",
+    "company": "Vitalis",
+    "location": "Mostar",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque.",
     "qualificationsAndRequirements": [
-      "Understanding of ethical AI concepts",
-      "Interest in machine learning applications",
+      "Background in dermatology or related field",
+      "Interest in clinical research",
       "Strong analytical skills"
     ],
-    "tags": ["Ethical AI", "Data Privacy", "Machine Learning"],
+    "tags": ["Ethical Care", "Doctor", "Researcher"],
     "experienceRequired": "N/A",
     "engagementType": "Part-time",
     "workArrangement": "Remote",
     "endingDate": "2025-04-05",
     "benefits": [
-      "Networking with AI professionals",
-      "Access to AI tools and platforms",
+      "Mentorship from leading dermatologists",
+      "Access to clinical research resources",
       "In-depth discussions on ethical dilemmas"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Sarah Taylor",
-    "contactPersonEmail": "sarah.taylor@telekom.com",
+    "contactPersonEmail": "sarah.vitalis@gmail.com",
     "featured": true
   },
   {
     "id": 10,
     "type": "Thesis Topic",
     "fieldOfStudy": "Electrical and Electronics Engineering",
-    "title": "Wireless Charging Systems",
-    "company": "Deutsche Telekom",
-    "location": "Stuttgart",
+    "title": "Expert for High Voltage Charging Systems",
+    "company": "HEP Grupa",
+    "location": "Rijeka",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sodales.",
     "qualificationsAndRequirements": [
       "Knowledge of electrical circuits",
-      "Interest in wireless technologies",
+      "Experience in high voltage systems",
       "Strong research skills"
     ],
-    "tags": ["Wireless", "Charging", "Electronics"],
+    "tags": ["Voltage", "Circuits", "Electronics"],
     "experienceRequired": "N/A",
     "engagementType": "Flexible",
     "workArrangement": "Remote",
     "endingDate": "2025-04-30",
     "benefits": [
-      "Access to state-of-the-art labs",
+      "Access to industry experts",
       "Research mentorship",
       "Opportunity to contribute to cutting-edge technology"
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "David Johnson",
-    "contactPersonEmail": "david.johnson@telekom.com"
+    "contactPersonEmail": "david.hep@gmail.com"
   },
   {
     "id": 11,
     "type": "Extra Curriculum Project",
     "fieldOfStudy": "Software Engineering",
     "title": "Open Source Contribution",
-    "company": "Deutsche Telekom",
-    "location": "Berlin",
+    "company": "LANACO",
+    "location": "Banja Luka",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt.",
     "qualificationsAndRequirements": [
       "Experience with Git and version control",
       "Strong coding skills",
       "Willingness to collaborate on open source projects"
     ],
-    "tags": ["Open Source", "Git", "Telecom"],
+    "tags": ["Open Source", "Git", "Coding"],
     "experienceRequired": "Intermediate",
     "engagementType": "Project-based",
     "workArrangement": "Remote",
@@ -298,15 +298,15 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Sophia Lee",
-    "contactPersonEmail": "sophia.lee@telekom.com"
+    "contactPersonEmail": "sophia.lanaco@gmail.com"
   },
   {
     "id": 12,
     "type": "Job Offer",
     "fieldOfStudy": "Artificial Intelligence and Data Engineering",
     "title": "Machine Learning Engineer",
-    "company": "Deutsche Telekom",
-    "location": "Berlin",
+    "company": "Gauss Development",
+    "location": "Osijek",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus blandit.",
     "qualificationsAndRequirements": [
       "Proficiency in Python and TensorFlow",
@@ -325,15 +325,15 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Mark Allen",
-    "contactPersonEmail": "mark.allen@telekom.com"
+    "contactPersonEmail": "mark.gauss@gmail.com"
   },
   {
     "id": 13,
     "type": "Internship",
     "fieldOfStudy": "Mechanical Engineering",
     "title": "Automation Intern",
-    "company": "Deutsche Telekom",
-    "location": "Cologne",
+    "company": "Rimac",
+    "location": "Zagreb",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas posuere.",
     "qualificationsAndRequirements": [
       "Basic understanding of automation tools",
@@ -352,7 +352,7 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Liam Brown",
-    "contactPersonEmail": "liam.brown@telekom.com",
+    "contactPersonEmail": "liam.rimac@gmail.com",
     "featured": true
   },
   {
@@ -360,8 +360,8 @@
     "type": "Mentorship",
     "fieldOfStudy": "Visual Arts and Visual Communications Design",
     "title": "UI/UX Design Principles",
-    "company": "Deutsche Telekom",
-    "location": "Hamburg",
+    "company": "NSoft",
+    "location": "Mostar",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo.",
     "qualificationsAndRequirements": [
       "Familiarity with design systems and tools (e.g., Figma, Adobe XD)",
@@ -380,7 +380,7 @@
     ],
     "employeeInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "contactPerson": "Olivia White",
-    "contactPersonEmail": "olivia.white@telekom.com",
+    "contactPersonEmail": "olivia.NSoft@gmail.com",
     "featured": true
   }
 ]
