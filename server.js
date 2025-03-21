@@ -2,9 +2,18 @@ const express = require("express");
 const cors = require("cors");
 const { readFile, writeFile } = require("fs");
 const path = require("path");
+const fs = require("fs");
 const transporter = require("./email.js");
 
 const multer = require("multer");
+
+const uploadsDir = path.join(__dirname, "uploads");
+
+// Check if the directory exists, and if not, create it
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+  console.log("Uploads directory created");
+}
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
