@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }); // Temporary directory for uploaded files
 
 const app = express();
-const PORT = 3000; // Choose a port number
+const PORT = process.env.PORT || 3000; // Choose a port number
 
 app.use(cors());
 app.use(express.json()); // Use express.json() for parsing JSON bodies
