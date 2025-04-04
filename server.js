@@ -1,11 +1,20 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const { readFile, writeFile } = require("fs");
 const path = require("path");
 const fs = require("fs");
 const transporter = require("./email.js");
-
 const multer = require("multer");
+
+// Import Supabase client library
+const { createClient } = require("@supabase/supabase-js");
+
+// Initialize Supabase client with environment variables
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY; // Use your service key
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const uploadsDir = path.join(__dirname, "uploads");
 
@@ -59,14 +68,69 @@ app.get("/", (req, res) => {
 });
 
 // GET endpoint to fetch all opportunities
-app.get("/opportunities", (req, res) => {
-  readFile(OPPORTUNITIES_FILE, "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading file:", err);
-      return res.status(500).send("Error reading data");
+// app.get("/opportunities1", (req, res) => {
+//   readFile(OPPORTUNITIES_FILE, "utf8", (err, data) => {
+//     if (err) {
+//       console.error("Error reading file:", err);
+//       return res.status(500).send("Error reading data");
+//     }
+//     res.json(JSON.parse(data));
+//   });
+// });
+
+// GET endpoint to fetch all opportunities
+app.get("/opportunities", async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from("opportunities")
+      .select("*");
+
+    if (error) {
+      console.error("Error fetching opportunities:", error);
+      return res.status(500).json({ error: error.message });
     }
-    res.json(JSON.parse(data));
-  });
+
+    // Map over each record to parse the JSON string fields into actual arrays
+    const parsedData = data.map((item) => {
+      // Clone the record so we don't mutate the original object
+      const parsedItem = { ...item };
+
+      try {
+        if (
+          typeof parsedItem.qualificationsAndRequirements === "string"
+        ) {
+          parsedItem.qualificationsAndRequirements = JSON.parse(
+            parsedItem.qualificationsAndRequirements
+          );
+        }
+        if (typeof parsedItem.tags === "string") {
+          parsedItem.tags = JSON.parse(parsedItem.tags);
+        }
+
+        if (typeof parsedItem.benefits === "string") {
+          parsedItem.benefits = JSON.parse(parsedItem.benefits);
+        }
+
+        if (typeof parsedItem.experienceRequired === "string") {
+          parsedItem.experienceRequired = JSON.parse(
+            parsedItem.experienceRequired
+          );
+        }
+      } catch (parseError) {
+        console.error(
+          `Error parsing JSON fields for item with id ${parsedItem.id}:`,
+          parseError
+        );
+      }
+
+      return parsedItem;
+    });
+
+    res.json(parsedData);
+  } catch (err) {
+    console.error("Unexpected error:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // POST endpoint to add a new opportunity
