@@ -653,33 +653,169 @@ app.post(
   }
 );
 
+// app.post("/smart-search", async (req, res) => {
+//   try {
+//     const { query } = req.body;
+
+//     console.log(query);
+
+//     if (!query)
+//       return res.status(400).json({ error: "Query is required" });
+
+//     // Read JSON data from files
+
+//     const accounts = await readJSONFile(ACCOUNTS_FILE);
+
+//     const opportunities = await readJSONFile(OPPORTUNITIES_FILE);
+
+//     const applications = await readJSONFile(APPLICATIONS_FILE);
+
+//     // Merge data into a human-readable prompt
+
+//     const documents = applications.map((app) => {
+//       const user =
+//         accounts.find((acc) => acc.id === app.user_id) || {};
+
+//       const opportunity =
+//         opportunities.find((opp) => opp.id == app.opportunity_id) ||
+//         {};
+
+//       return `[ID: ${app.application_id}] Applicant "${user.name_and_surname}" from University "${user.university_name}" located at "${user.university_location}" applied for "${opportunity.title}" opportunity from "${opportunity.location}" on application date of "${app.application_date}".`;
+//     });
+
+//     const prompt = `Find the most relevant matches for this query: "${query}". Here are the applications:\n${documents.join(
+//       "\n"
+//     )}\n\nPlease return only the application IDs that match the query. Provide the IDs in the following format:\n\n"Matching IDs: [1, 2, 3]"`;
+
+//     console.log(prompt);
+
+//     // Send the prompt to the DeepSeek AI model
+
+//     const response = await fetch(
+//       "http://127.0.0.1:11434/api/generate",
+
+//       {
+//         method: "POST",
+
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+
+//         body: JSON.stringify({
+//           model: "nezahatkorkmaz/deepseek-v3:latest",
+
+//           prompt,
+
+//           stream: false,
+//         }),
+//       }
+//     );
+
+//     if (!response.ok) {
+//       throw new Error(`DeepSeek API error: ${response.statusText}`);
+//     }
+
+//     const responseData = await response.json();
+
+//     const deepSeekResponse = responseData.response;
+
+//     // Extract matching application IDs
+
+//     const match = deepSeekResponse.match(/Matching IDs: \[(.*?)\]/);
+
+//     const matchingIds = match
+//       ? match[1].split(",").map((id) => id.trim())
+//       : [];
+
+//     // Filter applications based on IDs and enrich them with full data
+
+//     const enrichedResults = applications
+
+//       .filter((app) => matchingIds.includes(app.application_id))
+
+//       .map((app) => {
+//         const user =
+//           accounts.find((acc) => acc.id === app.user_id) || {};
+
+//         const opportunity =
+//           opportunities.find((opp) => opp.id == app.opportunity_id) ||
+//           {};
+
+//         return {
+//           application_id: app.application_id,
+
+//           application_date: app.application_date,
+
+//           applicant_name: user.name_and_surname,
+
+//           applicant_email: user.email,
+
+//           university_name: user.university_name,
+
+//           university_location: user.university_location,
+
+//           opportunity_title: opportunity.title,
+
+//           opportunity_location: opportunity.location,
+//         };
+//       });
+
+//     res.json(enrichedResults);
+//   } catch (error) {
+//     console.error("Error performing smart search:", error);
+
+//     res.status(500).json({ error: "Failed to perform smart search" });
+//   }
+// });
+
 app.post("/smart-search", async (req, res) => {
   try {
     const { query } = req.body;
-
-    console.log(query);
-
-    if (!query)
+    console.log("Search query:", query);
+    if (!query) {
       return res.status(400).json({ error: "Query is required" });
+    }
 
-    // Read JSON data from files
+    // Query Supabase for accounts, opportunities, and applications data
+    const { data: accountsData, error: accountsError } =
+      await supabase.from("accounts").select("*");
+    if (accountsError) {
+      console.error("Error fetching accounts:", accountsError);
+      return res.status(500).json({ error: accountsError.message });
+    }
 
-    const accounts = await readJSONFile(ACCOUNTS_FILE);
+    const { data: opportunitiesData, error: opportunitiesError } =
+      await supabase.from("opportunities").select("*");
+    if (opportunitiesError) {
+      console.error(
+        "Error fetching opportunities:",
+        opportunitiesError
+      );
+      return res
+        .status(500)
+        .json({ error: opportunitiesError.message });
+    }
 
-    const opportunities = await readJSONFile(OPPORTUNITIES_FILE);
+    const { data: applicationsData, error: applicationsError } =
+      await supabase.from("applications").select("*");
+    if (applicationsError) {
+      console.error(
+        "Error fetching applications:",
+        applicationsError
+      );
+      return res
+        .status(500)
+        .json({ error: applicationsError.message });
+    }
 
-    const applications = await readJSONFile(APPLICATIONS_FILE);
-
-    // Merge data into a human-readable prompt
-
-    const documents = applications.map((app) => {
+    // Create a human-readable prompt by merging the data
+    const documents = applicationsData.map((app) => {
       const user =
-        accounts.find((acc) => acc.id === app.user_id) || {};
-
+        accountsData.find((acc) => acc.id === app.user_id) || {};
       const opportunity =
-        opportunities.find((opp) => opp.id == app.opportunity_id) ||
-        {};
-
+        opportunitiesData.find(
+          (opp) => opp.id == app.opportunity_id
+        ) || {};
       return `[ID: ${app.application_id}] Applicant "${user.name_and_surname}" from University "${user.university_name}" located at "${user.university_location}" applied for "${opportunity.title}" opportunity from "${opportunity.location}" on application date of "${app.application_date}".`;
     });
 
@@ -687,75 +823,57 @@ app.post("/smart-search", async (req, res) => {
       "\n"
     )}\n\nPlease return only the application IDs that match the query. Provide the IDs in the following format:\n\n"Matching IDs: [1, 2, 3]"`;
 
-    console.log(prompt);
+    console.log("Generated prompt:", prompt);
 
     // Send the prompt to the DeepSeek AI model
-
-    const response = await fetch(
+    const deepSeekResponseRaw = await fetch(
       "http://127.0.0.1:11434/api/generate",
-
       {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify({
           model: "nezahatkorkmaz/deepseek-v3:latest",
-
           prompt,
-
           stream: false,
         }),
       }
     );
 
-    if (!response.ok) {
-      throw new Error(`DeepSeek API error: ${response.statusText}`);
+    if (!deepSeekResponseRaw.ok) {
+      throw new Error(
+        `DeepSeek API error: ${deepSeekResponseRaw.statusText}`
+      );
     }
 
-    const responseData = await response.json();
+    const deepSeekResponseData = await deepSeekResponseRaw.json();
+    const deepSeekResponse = deepSeekResponseData.response;
 
-    const deepSeekResponse = responseData.response;
-
-    // Extract matching application IDs
-
+    // Extract matching application IDs using regex
     const match = deepSeekResponse.match(/Matching IDs: \[(.*?)\]/);
-
     const matchingIds = match
       ? match[1].split(",").map((id) => id.trim())
       : [];
 
-    // Filter applications based on IDs and enrich them with full data
-
-    const enrichedResults = applications
-
+    // Filter and enrich the applications based on the matching IDs
+    const enrichedResults = applicationsData
       .filter((app) => matchingIds.includes(app.application_id))
-
       .map((app) => {
         const user =
-          accounts.find((acc) => acc.id === app.user_id) || {};
-
+          accountsData.find((acc) => acc.id === app.user_id) || {};
         const opportunity =
-          opportunities.find((opp) => opp.id == app.opportunity_id) ||
-          {};
-
+          opportunitiesData.find(
+            (opp) => opp.id == app.opportunity_id
+          ) || {};
         return {
           application_id: app.application_id,
-
           application_date: app.application_date,
-
           applicant_name: user.name_and_surname,
-
           applicant_email: user.email,
-
           university_name: user.university_name,
-
           university_location: user.university_location,
-
           opportunity_title: opportunity.title,
-
           opportunity_location: opportunity.location,
         };
       });
@@ -763,7 +881,6 @@ app.post("/smart-search", async (req, res) => {
     res.json(enrichedResults);
   } catch (error) {
     console.error("Error performing smart search:", error);
-
     res.status(500).json({ error: "Failed to perform smart search" });
   }
 });
