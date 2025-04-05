@@ -369,15 +369,165 @@ const readJSONFile = async (filePath) => {
 };
 
 // GET endpoint to fetch all applications
-app.get("/applications", (req, res) => {
-  readFile(APPLICATIONS_FILE, "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading applications file:", err);
-      return res.status(500).send("Error reading applications data");
+// app.get("/applications1", (req, res) => {
+//   readFile(APPLICATIONS_FILE, "utf8", (err, data) => {
+//     if (err) {
+//       console.error("Error reading applications file:", err);
+//       return res.status(500).send("Error reading applications data");
+//     }
+//     res.json(JSON.parse(data));
+//   });
+// });
+
+app.get("/applications", async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from("applications")
+      .select("*");
+    if (error) {
+      console.error("Error fetching applications:", error);
+      return res.status(500).json({ error: error.message });
     }
-    res.json(JSON.parse(data));
-  });
+    res.json(data);
+  } catch (err) {
+    console.error("Unexpected error fetching applications:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
+
+// app.post(
+//   "/applications",
+//   upload.single("cvUpload"),
+//   async (req, res) => {
+//     try {
+//       const { userId, opportunityId } = req.body;
+//       const file = req.file; // Access the uploaded file
+//       console.log("Received application data:", {
+//         userId,
+//         opportunityId,
+//       });
+
+//       const date = new Date();
+//       const applicationDate = date.toISOString().split("T")[0];
+//       // Generate application data
+//       const newApplication = {
+//         application_id: `${Date.now()}`,
+//         user_id: userId,
+//         opportunity_id: opportunityId,
+//         application_date: applicationDate,
+//       };
+
+//       // Read existing applications from file
+//       readFile(APPLICATIONS_FILE, "utf8", (err, data) => {
+//         const applications = err ? [] : JSON.parse(data);
+
+//         // Add the new application
+//         applications.push(newApplication);
+
+//         // Write back the updated applications array
+//         writeFile(
+//           APPLICATIONS_FILE,
+//           JSON.stringify(applications, null, 2),
+//           (writeErr) => {
+//             if (writeErr) {
+//               console.error(
+//                 "Error writing to applications file:",
+//                 writeErr
+//               );
+//               return res.status(500).json({
+//                 status: "error",
+//                 message: "Failed to save application data.",
+//               });
+//             }
+
+//             console.log(
+//               "Application saved successfully:",
+//               newApplication
+//             );
+//           }
+//         );
+//       });
+
+//       // Fetch user and opportunity data
+//       const accounts = await readJSONFile(ACCOUNTS_FILE);
+//       const user = accounts.find((account) => account.id === userId);
+//       if (!user)
+//         return res.status(404).json({ error: "User not found" });
+
+//       const opportunities = await readJSONFile(OPPORTUNITIES_FILE);
+//       const opportunity = opportunities.find(
+//         (opp) => opp.id == opportunityId
+//       );
+//       if (!opportunity || !opportunity.contactPersonEmail) {
+//         return res
+//           .status(404)
+//           .json({ error: "Opportunity or contact email not found" });
+//       }
+
+//       const studentName = user.name_and_surname;
+//       const studentEmail = user.email;
+//       const universityName = user.university_name || "N/A";
+//       const universityLocation = user.university_location || "N/A";
+//       const companyEmail = opportunity.contactPersonEmail;
+//       const opportunityTitle = opportunity.title;
+
+//       // Email to Company employee
+//       const companyMailOptions = {
+//         from: "noreply.company.student.platform@gmail.com",
+//         to: companyEmail,
+//         subject: `New Application for ${opportunityTitle} through the Student Platform`,
+//         html: `<h1>New Application Received</h1>
+//         <h3>${studentName} has applied for <b>${opportunityTitle}</b> opportunity.</h3>
+//         <p><b>Applicant:</b> ${studentName} (${studentEmail})</p>
+//         <p><b>University:</b> ${universityName}, ${universityLocation}</p>
+//         <p><b>Note:</b> If provided, CV will be attached</p>`,
+//         attachments: file
+//           ? [{ path: file.path, filename: file.originalname }]
+//           : [],
+//       };
+
+//       // Email to student
+//       const studentMailOptions = {
+//         from: "noreply.company.student.platform@gmail.com",
+//         to: studentEmail,
+//         subject: `Application Confirmation for ${opportunityTitle}`,
+//         html: `<h1>Application Confirmation</h1>
+//         <h3>Thank you for applying for <b>${opportunityTitle} opportunity</b>.</h3>
+//         <p><b>Opportunity:</b> ${opportunityTitle}</p>
+//         <p><b>Contact Person Email:</b> ${companyEmail}</p>
+//         <p><b>Your Name:</b> ${studentName}</p>
+//         <p><b>Your Email:</b> ${studentEmail}</p>
+//         <p><b>University:</b> ${universityName}, ${universityLocation}</p>`,
+//         attachments: file
+//           ? [{ path: file.path, filename: file.originalname }]
+//           : [],
+//       };
+
+//       // Send emails
+//       console.log("Sending emails...");
+//       await transporter.sendMail(companyMailOptions);
+//       await transporter.sendMail(studentMailOptions);
+
+//       // Cleanup: Delete the uploaded file
+//       if (file) {
+//         const fs = require("fs");
+//         fs.unlink(file.path, (err) => {
+//           if (err) console.error("Failed to delete file:", err);
+//         });
+//       }
+
+//       res.status(200).json({ message: "Emails sent successfully!" });
+//       console.log(
+//         "Email sent succesfully!\nApplication processed successfully!"
+//       );
+//     } catch (error) {
+//       console.error("Error handling application:", error);
+//       res
+//         .status(500)
+//         .json({ error: "Error processing the application" });
+//     }
+//   }
+// );
 
 app.post(
   "/applications",
@@ -385,7 +535,7 @@ app.post(
   async (req, res) => {
     try {
       const { userId, opportunityId } = req.body;
-      const file = req.file; // Access the uploaded file
+      const file = req.file; // Optional file upload (e.g., CV)
       console.log("Received application data:", {
         userId,
         opportunityId,
@@ -393,119 +543,109 @@ app.post(
 
       const date = new Date();
       const applicationDate = date.toISOString().split("T")[0];
-      // Generate application data
+
+      // Create a new application object. Adjust fields as needed.
       const newApplication = {
-        application_id: `${Date.now()}`,
+        // Depending on your schema, you might let Supabase auto-generate an ID.
+        application_id: `${Date.now()}`, // or omit if using auto-increment
         user_id: userId,
         opportunity_id: opportunityId,
         application_date: applicationDate,
       };
 
-      // Read existing applications from file
-      readFile(APPLICATIONS_FILE, "utf8", (err, data) => {
-        const applications = err ? [] : JSON.parse(data);
+      // Insert the new application into the "applications" table
+      const { data: insertedApplication, error: insertError } =
+        await supabase
+          .from("applications")
+          .insert(newApplication, { returning: "representation" })
+          .single();
 
-        // Add the new application
-        applications.push(newApplication);
-
-        // Write back the updated applications array
-        writeFile(
-          APPLICATIONS_FILE,
-          JSON.stringify(applications, null, 2),
-          (writeErr) => {
-            if (writeErr) {
-              console.error(
-                "Error writing to applications file:",
-                writeErr
-              );
-              return res.status(500).json({
-                status: "error",
-                message: "Failed to save application data.",
-              });
-            }
-
-            console.log(
-              "Application saved successfully:",
-              newApplication
-            );
-          }
-        );
-      });
-
-      // Fetch user and opportunity data
-      const accounts = await readJSONFile(ACCOUNTS_FILE);
-      const user = accounts.find((account) => account.id === userId);
-      if (!user)
-        return res.status(404).json({ error: "User not found" });
-
-      const opportunities = await readJSONFile(OPPORTUNITIES_FILE);
-      const opportunity = opportunities.find(
-        (opp) => opp.id == opportunityId
-      );
-      if (!opportunity || !opportunity.contactPersonEmail) {
-        return res
-          .status(404)
-          .json({ error: "Opportunity or contact email not found" });
+      if (insertError) {
+        console.error("Error inserting application:", insertError);
+        return res.status(500).json({ error: insertError.message });
       }
 
-      const studentName = user.name_and_surname;
-      const studentEmail = user.email;
-      const universityName = user.university_name || "N/A";
-      const universityLocation = user.university_location || "N/A";
-      const companyEmail = opportunity.contactPersonEmail;
-      const opportunityTitle = opportunity.title;
+      // Retrieve account data for the given user
+      const { data: accountData, error: accountError } =
+        await supabase
+          .from("accounts")
+          .select("*")
+          .eq("id", userId)
+          .single();
+      if (accountError) {
+        console.error("Error fetching account:", accountError);
+        return res.status(500).json({ error: accountError.message });
+      }
 
-      // Email to Company employee
+      // Retrieve opportunity data for the given opportunity
+      const { data: opportunityData, error: oppError } =
+        await supabase
+          .from("opportunities")
+          .select("*")
+          .eq("id", opportunityId)
+          .single();
+      if (oppError) {
+        console.error("Error fetching opportunity:", oppError);
+        return res.status(500).json({ error: oppError.message });
+      }
+
+      // Extract necessary information for email notifications
+      const studentName = accountData.name_and_surname;
+      const studentEmail = accountData.email;
+      const universityName = accountData.university_name || "N/A";
+      const universityLocation =
+        accountData.university_location || "N/A";
+      const companyEmail = opportunityData.contactPersonEmail;
+      const opportunityTitle = opportunityData.title;
+
+      // Configure email options for the company employee
       const companyMailOptions = {
         from: "noreply.company.student.platform@gmail.com",
         to: companyEmail,
         subject: `New Application for ${opportunityTitle} through the Student Platform`,
         html: `<h1>New Application Received</h1>
-        <h3>${studentName} has applied for <b>${opportunityTitle}</b> opportunity.</h3>
-        <p><b>Applicant:</b> ${studentName} (${studentEmail})</p>
-        <p><b>University:</b> ${universityName}, ${universityLocation}</p>
-        <p><b>Note:</b> If provided, CV will be attached</p>`,
+      <h3>${studentName} has applied for <b>${opportunityTitle}</b> opportunity.</h3>
+      <p><b>Applicant:</b> ${studentName} (${studentEmail})</p>
+      <p><b>University:</b> ${universityName}, ${universityLocation}</p>
+      <p><b>Note:</b> If provided, CV will be attached</p>`,
         attachments: file
           ? [{ path: file.path, filename: file.originalname }]
           : [],
       };
 
-      // Email to student
+      // Configure email options for the student
       const studentMailOptions = {
         from: "noreply.company.student.platform@gmail.com",
         to: studentEmail,
         subject: `Application Confirmation for ${opportunityTitle}`,
         html: `<h1>Application Confirmation</h1>
-        <h3>Thank you for applying for <b>${opportunityTitle} opportunity</b>.</h3>
-        <p><b>Opportunity:</b> ${opportunityTitle}</p>
-        <p><b>Contact Person Email:</b> ${companyEmail}</p>
-        <p><b>Your Name:</b> ${studentName}</p>
-        <p><b>Your Email:</b> ${studentEmail}</p>
-        <p><b>University:</b> ${universityName}, ${universityLocation}</p>`,
+      <h3>Thank you for applying for <b>${opportunityTitle} opportunity</b>.</h3>
+      <p><b>Opportunity:</b> ${opportunityTitle}</p>
+      <p><b>Contact Person Email:</b> ${companyEmail}</p>
+      <p><b>Your Name:</b> ${studentName}</p>
+      <p><b>Your Email:</b> ${studentEmail}</p>
+      <p><b>University:</b> ${universityName}, ${universityLocation}</p>`,
         attachments: file
           ? [{ path: file.path, filename: file.originalname }]
           : [],
       };
 
-      // Send emails
       console.log("Sending emails...");
       await transporter.sendMail(companyMailOptions);
       await transporter.sendMail(studentMailOptions);
 
-      // Cleanup: Delete the uploaded file
+      // Cleanup: Delete the uploaded file if it exists
       if (file) {
-        const fs = require("fs");
         fs.unlink(file.path, (err) => {
           if (err) console.error("Failed to delete file:", err);
         });
       }
 
-      res.status(200).json({ message: "Emails sent successfully!" });
-      console.log(
-        "Email sent succesfully!\nApplication processed successfully!"
-      );
+      res
+        .status(201)
+        .json({ status: "success", data: newApplication });
     } catch (error) {
-      console.error("Error handling application:", error);
+      console.error("Error processing application:", error);
       res
         .status(500)
         .json({ error: "Error processing the application" });
