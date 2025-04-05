@@ -262,61 +262,97 @@ app.post("/opportunities", async (req, res) => {
 });
 
 // GET endpoint to fetch all accounts
-app.get("/accounts", (req, res) => {
-  readFile(ACCOUNTS_FILE, "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading file:", err);
-      return res.status(500).send("Error reading data");
+// app.get("/accounts1", (req, res) => {
+//   readFile(ACCOUNTS_FILE, "utf8", (err, data) => {
+//     if (err) {
+//       console.error("Error reading file:", err);
+//       return res.status(500).send("Error reading data");
+//     }
+//     res.json(JSON.parse(data));
+//   });
+// });
+
+app.get("/accounts", async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from("accounts")
+      .select("*");
+    if (error) {
+      console.error("Error fetching accounts:", error);
+      return res.status(500).json({ error: error.message });
     }
-    res.json(JSON.parse(data));
-  });
+    res.json(data);
+  } catch (err) {
+    console.error("Unexpected error fetching accounts:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // POST endpoint to add a new account
-app.post("/accounts", (req, res) => {
-  readFile(ACCOUNTS_FILE, "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading file:", err);
-      return res.status(500).json({
-        status: "error",
-        message: "Error reading data file.",
-      });
+// app.post("/accounts", (req, res) => {
+//   readFile(ACCOUNTS_FILE, "utf8", (err, data) => {
+//     if (err) {
+//       console.error("Error reading file:", err);
+//       return res.status(500).json({
+//         status: "error",
+//         message: "Error reading data file.",
+//       });
+//     }
+
+//     try {
+//       const accounts = JSON.parse(data);
+//       const newAccount = req.body;
+
+//       // Add the new account to the array
+//       accounts.push(newAccount);
+
+//       // Write the updated accounts array back to the file
+//       writeFile(
+//         ACCOUNTS_FILE,
+//         JSON.stringify(accounts, null, 2),
+//         (writeErr) => {
+//           if (writeErr) {
+//             console.error("Error writing file:", writeErr);
+//             return res.status(500).json({
+//               status: "error",
+//               message: "Error saving account data.",
+//             });
+//           }
+
+//           res.status(201).json({
+//             status: "success",
+//             data: newAccount,
+//           });
+//         }
+//       );
+//     } catch (parseErr) {
+//       console.error("Error parsing JSON:", parseErr);
+//       res.status(500).json({
+//         status: "error",
+//         message: "Error parsing data file.",
+//       });
+//     }
+//   });
+// });
+
+app.post("/accounts", async (req, res) => {
+  try {
+    const newAccount = req.body;
+    const { data, error } = await supabase
+      .from("accounts")
+      .insert(newAccount)
+      .single();
+    if (error) {
+      console.error("Error inserting account:", error);
+      return res
+        .status(500)
+        .json({ status: "error", message: error.message });
     }
-
-    try {
-      const accounts = JSON.parse(data);
-      const newAccount = req.body;
-
-      // Add the new account to the array
-      accounts.push(newAccount);
-
-      // Write the updated accounts array back to the file
-      writeFile(
-        ACCOUNTS_FILE,
-        JSON.stringify(accounts, null, 2),
-        (writeErr) => {
-          if (writeErr) {
-            console.error("Error writing file:", writeErr);
-            return res.status(500).json({
-              status: "error",
-              message: "Error saving account data.",
-            });
-          }
-
-          res.status(201).json({
-            status: "success",
-            data: newAccount,
-          });
-        }
-      );
-    } catch (parseErr) {
-      console.error("Error parsing JSON:", parseErr);
-      res.status(500).json({
-        status: "error",
-        message: "Error parsing data file.",
-      });
-    }
-  });
+    res.status(201).json({ status: "success", data: newAccount });
+  } catch (err) {
+    console.error("Unexpected error inserting account:", err);
+    res.status(500).json({ status: "error", message: err.message });
+  }
 });
 
 const readJSONFile = async (filePath) => {

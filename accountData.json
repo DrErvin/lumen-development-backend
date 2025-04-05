@@ -68,5 +68,23 @@
     "account_type": "student",
     "university_name": "International University of Sarajevo",
     "university_location": "Bosnia and Herzegovina"
+  },
+  {
+    "id": "s-1743854033020",
+    "email": "220302185@student.ius.edu.ba",
+    "account_type": "student",
+    "university_name": "International University of Sarajevo",
+    "university_location": "Bosnia and Herzegovina",
+    "name_and_surname": "Ervin Dragovic",
+    "password": "Test123"
+  },
+  {
+    "id": "c-1743854487039",
+    "email": "ervin.dragovic@company.com",
+    "account_type": "company",
+    "university_name": null,
+    "university_location": null,
+    "name_and_surname": "Ervin Dragovic",
+    "password": "Test123"
   }
 ]
