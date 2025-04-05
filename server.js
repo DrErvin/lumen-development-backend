@@ -886,17 +886,99 @@ app.post("/smart-search", async (req, res) => {
 });
 
 // GET endpoint to fetch all world universities
-app.get("/world-universities", (req, res) => {
-  readFile(WU_FILE, "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading world universities file:", err);
-      return res
-        .status(500)
-        .json({ error: "Error reading data file" });
+// app.get("/world-universities1", (req, res) => {
+//   readFile(WU_FILE, "utf8", (err, data) => {
+//     if (err) {
+//       console.error("Error reading world universities file:", err);
+//       return res
+//         .status(500)
+//         .json({ error: "Error reading data file" });
+//     }
+//     // Return the entire JSON file contents
+//     res.json(JSON.parse(data));
+//   });
+// });
+app.get("/world-universities", async (req, res) => {
+  try {
+    const limit = 1000;
+    let offset = 0;
+    let allData = [];
+    let fetchMore = true;
+
+    while (fetchMore) {
+      // Fetch a batch of rows using the range method
+      const { data, error } = await supabase
+        .from("world-universities-and-domains")
+        .select("*")
+        .range(offset, offset + limit - 1);
+
+      if (error) {
+        console.error("Error fetching world universities:", error);
+        return res.status(500).json({ error: error.message });
+      }
+
+      if (data.length === 0) {
+        // No more rows returned, end the loop
+        fetchMore = false;
+      } else {
+        // Append the current batch to our results array
+        allData = allData.concat(data);
+        // If we received less than the limit, there are no more rows
+        if (data.length < limit) {
+          fetchMore = false;
+        } else {
+          // Otherwise, update the offset for the next batch
+          offset += limit;
+        }
+      }
     }
-    // Return the entire JSON file contents
-    res.json(JSON.parse(data));
-  });
+
+    // Process and parse each record as before
+    const parsedData = allData.map((item) => {
+      let parsedDomains = item.domains;
+      if (typeof parsedDomains === "string") {
+        try {
+          parsedDomains = JSON.parse(parsedDomains);
+        } catch (e) {
+          console.error("Error parsing domains for item:", item, e);
+          parsedDomains = [parsedDomains];
+        }
+      }
+
+      let parsedWebPages = item.web_pages;
+      if (typeof parsedWebPages === "string") {
+        try {
+          parsedWebPages = JSON.parse(parsedWebPages);
+        } catch (e) {
+          console.error("Error parsing web_pages for item:", item, e);
+          parsedWebPages = [parsedWebPages];
+        }
+      }
+
+      let parsedStateProvince = item["state-province"];
+      if (
+        typeof parsedStateProvince === "string" &&
+        parsedStateProvince.trim() === ""
+      ) {
+        parsedStateProvince = null;
+      }
+
+      return {
+        ...item,
+        domains: parsedDomains,
+        web_pages: parsedWebPages,
+        "state-province": parsedStateProvince,
+      };
+    });
+
+    res.json(parsedData);
+  } catch (err) {
+    console.error(
+      "Unexpected error fetching world universities:",
+      err
+    );
+    res.status(500).json({ error: err.message });
+  }
 });
 
 app.listen(PORT, () => {
