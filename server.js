@@ -13,7 +13,7 @@ const { createClient } = require("@supabase/supabase-js");
 
 // Initialize Supabase client with environment variables
 const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_KEY; // Use your service key
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const uploadsDir = path.join(__dirname, "uploads");
@@ -90,38 +90,35 @@ app.get("/opportunities", async (req, res) => {
       return res.status(500).json({ error: error.message });
     }
 
-    // Map over each record to parse the JSON string fields into actual arrays
+    // Map over each record to parse JSON fields conditionally
     const parsedData = data.map((item) => {
       // Clone the record so we don't mutate the original object
       const parsedItem = { ...item };
 
-      try {
-        if (
-          typeof parsedItem.qualificationsAndRequirements === "string"
-        ) {
-          parsedItem.qualificationsAndRequirements = JSON.parse(
-            parsedItem.qualificationsAndRequirements
-          );
+      const parseIfJSON = (field) => {
+        if (typeof field === "string") {
+          const trimmed = field.trim();
+          // Check if the string looks like a JSON array or object
+          if (trimmed.startsWith("[") || trimmed.startsWith("{")) {
+            try {
+              return JSON.parse(trimmed);
+            } catch (err) {
+              console.error(`Error parsing JSON field:`, err);
+              // Return the original value if parsing fails
+            }
+          }
         }
-        if (typeof parsedItem.tags === "string") {
-          parsedItem.tags = JSON.parse(parsedItem.tags);
-        }
+        return field;
+      };
 
-        if (typeof parsedItem.benefits === "string") {
-          parsedItem.benefits = JSON.parse(parsedItem.benefits);
-        }
-
-        if (typeof parsedItem.experienceRequired === "string") {
-          parsedItem.experienceRequired = JSON.parse(
-            parsedItem.experienceRequired
-          );
-        }
-      } catch (parseError) {
-        console.error(
-          `Error parsing JSON fields for item with id ${parsedItem.id}:`,
-          parseError
-        );
-      }
+      parsedItem.qualificationsAndRequirements = parseIfJSON(
+        parsedItem.qualificationsAndRequirements
+      );
+      parsedItem.tags = parseIfJSON(parsedItem.tags);
+      parsedItem.benefits = parseIfJSON(parsedItem.benefits);
+      parsedItem.experienceRequired = parseIfJSON(
+        parsedItem.experienceRequired
+      );
 
       return parsedItem;
     });
@@ -134,47 +131,134 @@ app.get("/opportunities", async (req, res) => {
 });
 
 // POST endpoint to add a new opportunity
-app.post("/opportunities", (req, res) => {
-  readFile(OPPORTUNITIES_FILE, "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading file:", err);
-      return res.status(500).json({
-        status: "error",
-        message: "Error reading data file.",
-      });
-    }
+// app.post("/opportunities", (req, res) => {
+//   readFile(OPPORTUNITIES_FILE, "utf8", (err, data) => {
+//     if (err) {
+//       console.error("Error reading file:", err);
+//       return res.status(500).json({
+//         status: "error",
+//         message: "Error reading data file.",
+//       });
+//     }
 
-    try {
-      const opportunities = JSON.parse(data);
-      const newOpportunity = req.body;
-      opportunities.push(newOpportunity);
+//     try {
+//       const opportunities = JSON.parse(data);
+//       const newOpportunity = req.body;
+//       opportunities.push(newOpportunity);
 
-      writeFile(
-        OPPORTUNITIES_FILE,
-        JSON.stringify(opportunities, null, 2),
-        (writeErr) => {
-          if (writeErr) {
-            console.error("Error writing file:", writeErr);
-            return res.status(500).json({
-              status: "error",
-              message: "Error saving opportunity data.",
-            });
-          }
+//       writeFile(
+//         OPPORTUNITIES_FILE,
+//         JSON.stringify(opportunities, null, 2),
+//         (writeErr) => {
+//           if (writeErr) {
+//             console.error("Error writing file:", writeErr);
+//             return res.status(500).json({
+//               status: "error",
+//               message: "Error saving opportunity data.",
+//             });
+//           }
 
-          res.status(201).json({
-            status: "success",
-            data: newOpportunity,
-          });
-        }
+//           res.status(201).json({
+//             status: "success",
+//             data: newOpportunity,
+//           });
+//         }
+//       );
+//     } catch (parseErr) {
+//       console.error("Error parsing JSON:", parseErr);
+//       res.status(500).json({
+//         status: "error",
+//         message: "Error parsing data file.",
+//       });
+//     }
+//   });
+// });
+
+// POST endpoint to add a new opportunity using Supabase
+app.post("/opportunities", async (req, res) => {
+  try {
+    // Get the new opportunity data from the request body
+    let newOpportunity = req.body;
+
+    // Convert array fields to JSON strings if necessary
+    if (
+      newOpportunity.qualificationsAndRequirements &&
+      Array.isArray(newOpportunity.qualificationsAndRequirements)
+    ) {
+      newOpportunity.qualificationsAndRequirements = JSON.stringify(
+        newOpportunity.qualificationsAndRequirements
       );
-    } catch (parseErr) {
-      console.error("Error parsing JSON:", parseErr);
-      res.status(500).json({
-        status: "error",
-        message: "Error parsing data file.",
-      });
     }
-  });
+    if (newOpportunity.tags && Array.isArray(newOpportunity.tags)) {
+      newOpportunity.tags = JSON.stringify(newOpportunity.tags);
+    }
+    if (
+      newOpportunity.benefits &&
+      Array.isArray(newOpportunity.benefits)
+    ) {
+      newOpportunity.benefits = JSON.stringify(
+        newOpportunity.benefits
+      );
+    }
+    if (
+      newOpportunity.experienceRequired &&
+      Array.isArray(newOpportunity.experienceRequired)
+    ) {
+      newOpportunity.experienceRequired = JSON.stringify(
+        newOpportunity.experienceRequired
+      );
+    }
+
+    // Insert the new opportunity into the "opportunities" table
+    const { data, error } = await supabase
+      .from("opportunities")
+      .insert(newOpportunity)
+      .single(); // .single() returns the inserted record
+
+    if (error) {
+      console.error("Error inserting opportunity:", error);
+      return res
+        .status(500)
+        .json({ status: "error", message: error.message });
+    }
+
+    // Helper function to conditionally parse JSON fields
+    const parseIfJSON = (field) => {
+      if (typeof field === "string") {
+        const trimmed = field.trim();
+        // Check if the string looks like a JSON array or object
+        if (trimmed.startsWith("[") || trimmed.startsWith("{")) {
+          try {
+            return JSON.parse(trimmed);
+          } catch (err) {
+            console.error("Error parsing JSON field:", err);
+            // Fall back to the original value if parsing fails
+          }
+        }
+      }
+      return field;
+    };
+
+    // Parse the inserted record using the same logic as GET endpoint
+    const parsedOpportunity = {
+      ...newOpportunity,
+      qualificationsAndRequirements: parseIfJSON(
+        newOpportunity.qualificationsAndRequirements
+      ),
+      tags: parseIfJSON(newOpportunity.tags),
+      benefits: parseIfJSON(newOpportunity.benefits),
+      experienceRequired: parseIfJSON(
+        newOpportunity.experienceRequired
+      ),
+    };
+
+    res
+      .status(201)
+      .json({ status: "success", newOpportunity: parsedOpportunity });
+  } catch (err) {
+    console.error("Unexpected error inserting opportunity:", err);
+    res.status(500).json({ status: "error", message: err.message });
+  }
 });
 
 // GET endpoint to fetch all accounts
